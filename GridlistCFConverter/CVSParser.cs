@@ -100,7 +100,7 @@ namespace GridlistCFConverter
 
             if (!lat_descending)
             {
-                a = -a;
+               // a = -a;
                 //b = b;
             }
 

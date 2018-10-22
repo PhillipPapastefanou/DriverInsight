@@ -35,11 +35,11 @@ namespace GridlistCFConverter
         private CVSParser cvs_parser;
         private CVSBitmapTransposer cvs_transposer;
 
-        private static List<string> lonVarAliases = new List<string>() {"lon", "longitude"};
-        private static List<string> latVarAliases = new List<string>() { "lat", "latitude" };
+        private static List<string> lonVarAliases = new List<string>() {"lon", "longitude", "base_longitude"};
+        private static List<string> latVarAliases = new List<string>() { "lat", "latitude", "base_latitude" };
 
 
-        private static List<string> stationVarAliases = new List<string>() { "station", "gridcell" };
+        private static List<string> stationVarAliases = new List<string>() { "station", "gridcell", "base_station" };
 
 
         public bool IsOrthogonal { get; set; }

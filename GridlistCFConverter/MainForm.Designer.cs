@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBoxDisplay = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBoxConverter = new System.Windows.Forms.GroupBox();
@@ -54,15 +55,13 @@
             this.buttonClose = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialogDriver = new System.Windows.Forms.OpenFileDialog();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDisplay)).BeginInit();
             this.groupBoxConverter.SuspendLayout();
             this.groupBoxFileInfo.SuspendLayout();
             this.groupBoxDriverInput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -87,6 +86,17 @@
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.pictureBoxDisplay);
+            this.groupBox1.Font = new System.Drawing.Font("Myriad Pro", 12F);
+            this.groupBox1.Location = new System.Drawing.Point(20, 443);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(748, 412);
+            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "World map";
             // 
             // pictureBoxDisplay
             // 
@@ -343,17 +353,6 @@
             // 
             this.openFileDialogDriver.FileName = "openFileDialogDriver";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.pictureBoxDisplay);
-            this.groupBox1.Font = new System.Drawing.Font("Myriad Pro", 12F);
-            this.groupBox1.Location = new System.Drawing.Point(20, 443);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(748, 412);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "World map";
-            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -371,6 +370,7 @@
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseUp);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDisplay)).EndInit();
             this.groupBoxConverter.ResumeLayout(false);
             this.groupBoxConverter.PerformLayout();
@@ -379,7 +379,6 @@
             this.groupBoxDriverInput.ResumeLayout(false);
             this.groupBoxDriverInput.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -399,7 +398,6 @@
         private System.Windows.Forms.TextBox textBoxLon;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.GroupBox groupBoxConverter;
         private System.Windows.Forms.TextBox textBoxConLat;
         private System.Windows.Forms.TextBox textBoxConLon;

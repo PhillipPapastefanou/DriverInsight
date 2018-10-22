@@ -538,7 +538,10 @@ namespace NcInterop.Base
 
         //public static int nc_inq_natts(int ncid, out int ngatts) { lock(namebuf) { return NetCDFDynamic.f_nc_inq_natts.Invoke(ncid, out ngatts); } }
         //public static int nc_inq_unlimdim(int ncid, out int unlimdimid) { lock(namebuf) { return NetCDFDynamic.f_nc_inq_unlimdim.Invoke(ncid, out unlimdimid); } }
-        //public static int nc_inq_format(int ncid, out int format) { lock(namebuf) { return NetCDFDynamic.f_nc_inq_format.Invoke(ncid, out format); } }
+        public static int nc_inq_format(int ncid, out int format)
+        {
+            lock(namebuf) { return NetCDFDynamic.f_nc_inq_format.Invoke(ncid, out format); }
+        }
         public static int nc_inq_attname(int ncid, int varid, int attnum, out string name)
         {
             lock (namebuf)
@@ -1358,6 +1361,7 @@ namespace NcInterop.Base
         public static nc_enddef f_nc_enddef { get; private set; }
         public static nc_redef f_nc_redef { get; private set; }
         public static nc_inq f_nc_inq { get; private set; }
+       
         public static nc_def_var f_nc_def_var { get; private set; }
         public static nc_def_dim f_nc_def_dim { get; private set; }
         public static nc_def_var_deflate f_nc_def_var_deflate { get; private set; }

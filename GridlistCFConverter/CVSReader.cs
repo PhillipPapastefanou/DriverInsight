@@ -16,6 +16,8 @@ namespace GridlistCFConverter
         private int lonDimIndex;
         private int latDimIndex;
 
+        private int varID;
+
         public double MissingValue { get; set; }
 
         public CVSParser Parser { get; set; }
@@ -25,16 +27,45 @@ namespace GridlistCFConverter
             this.reader = reader;
             this.Parser = parser;
 
-            object missgValue =reader.MainGroup.GlobalAtts["missing_value"].Value;
-
-            MissingValue = Convert.ToDouble(missgValue, CultureInfo.InvariantCulture);
         }
+
+
+
+        private void CheckForMissingValue()
+        {
+            object missgValue = null;
+
+            //Search for a global missing value attribute
+            if (reader.MainGroup.GlobalAtts["missing_value"] != null)
+            {
+                missgValue = reader.MainGroup.GlobalAtts["missing_value"].Value;
+                MissingValue = Convert.ToDouble(missgValue, CultureInfo.InvariantCulture);
+            }
+
+            else
+            {
+
+                if (reader.MainGroup.Variabels[varID].Attributes["missing_value"] != null)
+                {
+                    missgValue = reader.MainGroup.Variabels[varID].Attributes["missing_value"].Value;
+                    MissingValue = Convert.ToDouble(missgValue, CultureInfo.InvariantCulture);
+                }
+
+                else
+                {
+                    // No missing value specified
+                    MissingValue = 0.0;
+                }
+
+            }
+        }
+
 
         public double[] GetFlatData(int lonDimID, int latDimID)
         {
             bool foundVar = false;
 
-            int varID = -1;
+            varID = -1;
             //At which dimension of the variable is the station dimension
             int varLonDimID = -1;
             int varLatDimID = -1;
@@ -70,6 +101,13 @@ namespace GridlistCFConverter
                     break;
                 }
             }
+
+
+            if (foundVar)
+            {
+                CheckForMissingValue();
+            }
+           
 
 
             NcVariable varSuit = reader.MainGroup.Variabels[varID];

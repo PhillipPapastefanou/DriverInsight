@@ -59,8 +59,7 @@ namespace GridlistCFConverter
         {
             double[] flatValues = cvsreader.GetFlatData(lonID, latID);
 
-            double missing_value = this.cvsreader.MissingValue;
-
+           
             //The Bitmap just behaves like CVS parser
             worldLons = new double[720];
             worldLats = new double[360];
@@ -77,32 +76,63 @@ namespace GridlistCFConverter
 
             // Figure out the "existing" datapoints first
             byte[,] dataPoints = new byte[lons.Length, lats.Length];
+            
+            double missing_value = this.cvsreader.MissingValue;
 
-            int u = 0;
-            for (int w = 0; w < lons.Length; w++)
+            // We have no missing value specified so we have to check for inf, -inf or
+            // nan
+            if (missing_value == 0.0)
             {
-                for (int h = 0; h < lats.Length; h++)
+                for (int w = 0; w < lons.Length; w++)
                 {
-                    //int i = w * lats.Length + h;
-                    int i = h * lons.Length + w;
-                    
-                    if (Math.Abs(flatValues[i] - missing_value) < 0.5)
+                    for (int h = 0; h < lats.Length; h++)
                     {
-                        dataPoints[w, h] = 0;
-                    }
+                        //int i = w * lats.Length + h;
+                        int i = h * lons.Length + w;
 
-                    else
-                    {
-                        dataPoints[w, h] = 1;
-                        u++;
-                    }
+                        if (Double.IsNaN(flatValues[i]))
+                        {
+                            dataPoints[w, h] = 0;
+                        }
 
+                        else if (Double.IsInfinity(flatValues[i]))
+                        {
+                            dataPoints[w, h] = 0;
+                        }
+
+                        else
+                        {
+                            dataPoints[w, h] = 1;
+                        }
+
+                    }
                 }
             }
-            
 
+            // We have a missing coord specified
+            else
+            {
+                for (int w = 0; w < lons.Length; w++)
+                {
+                    for (int h = 0; h < lats.Length; h++)
+                    {
+                        int i = h * lons.Length + w;
+
+                        if (Math.Abs(flatValues[i] - missing_value) < 0.5)
+                        {
+                            dataPoints[w, h] = 0;
+                        }
+
+                        else
+                        {
+                            dataPoints[w, h] = 1;
+                        }
+                    }
+                }
+            }
 
             byte[,] worldPoints = new byte[worldLons.Length, worldLats.Length];
+
 
             for (int w = 0; w < lons.Length; w++)
             {

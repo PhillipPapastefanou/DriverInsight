@@ -39,6 +39,20 @@ namespace NcInterop
             HandleResult(res);
 
 
+            //SByte[] s = NetCDF.nc_inq_libvers();
+            //string libvers =  s.ToString();
+
+            int format_id;
+
+       
+
+            res = NetCDF.nc_inq_format(ncid, out format_id);
+
+
+            CreateMode Mode = (CreateMode) format_id;
+
+
+
             //********************************************************
             // Loading Groups
             //********************************************************
